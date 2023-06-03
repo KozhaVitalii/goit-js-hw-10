@@ -1,0 +1,131 @@
+/* Отступ между элементами */
+/* #breed-select {
+    background-color: #f5f5f5;
+        border-radius: 5px;
+        padding: 5px;
+        width: 360px;
+        margin-top: 20px;
+    } */
+
+.slim-select {
+    width: 200px;
+    color: white;
+    background-color: gray;
+}
+
+
+.cat-info {
+    border-radius: 5px;
+    padding: 10px;
+    width: 1220px;
+    margin-top: 20px;
+}
+
+/* Стили для контейнера с изображением кота */
+.cat-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Стили для изображения кота */
+.cat-image {
+    width: 480px;
+    margin-right: 20px;
+}
+
+/* Стили для блока с информацией о коте */
+.cat-details {
+    flex-grow: 1;
+    width: 100%;
+}
+
+/* Стили для заголовка породы */
+.cat-breed {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Стили для описания кота */
+.cat-description {
+    margin-bottom: 10px;
+}
+
+/* Стили для ключа характера кота */
+.cat-temperament-key {
+    font-weight: bold;
+}
+
+/* Стили для значения характера кота */
+.cat-temperament-value {
+    font-weight: normal;
+}
+
+
+
+.loader {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    /* position: relative; */
+    animation: rotate 1s linear infinite;
+    position: absolute;
+    top: 30%; /* Положение по вертикали - посередине экрана */
+    left: 10%; /* Положение по горизонтали - посередине экрана */
+    transform: translate(-50%, -50%); /* Центрирование посередине */
+    z-index: 999; /* При необходимости, чтобы загрузчик был поверх других элементов */
+
+}
+
+.hidden {
+    display: none;
+}
+
+.loader::before,
+.loader::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 5px solid #FFF;
+    animation: prixClipFix 2s linear infinite;
+}
+
+.loader::after {
+    border-color: #FF3D00;
+    animation: prixClipFix 2s linear infinite, rotate 0.5s linear infinite reverse;
+    inset: 6px;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes prixClipFix {
+    0% {
+        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
+    }
+
+    25% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
+    }
+
+    50% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
+    }
+
+    75% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
+    }
+
+    100% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
+    }
+}
+
