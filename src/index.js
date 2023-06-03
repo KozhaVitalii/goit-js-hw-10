@@ -13,21 +13,23 @@ const breedSelect = new SlimSelect({
   }
 });
 
-
+// Получяем ссылку на элемент с классом "cat-info" в переменную catInfoDiv. 
 const catInfoDiv = document.querySelector('.cat-info');
 // const loaderElement = document.querySelector('.loader');
 
+// Устанавиваем обработчик события onChange для объекта breedSelect, который будет вызывать функцию 
+// handleBreedSelectChange при изменении выбранного значения в селекте породы.
 breedSelect.onChange = handleBreedSelectChange;
-// // breedSelect.addEventListener('change', handleBreedSelectChange);
+// breedSelect.addEventListener('change', handleBreedSelectChange);
 
-
+// Вызываем функцию fetchBreeds с передачей объекта breedSelect в качестве аргумента.
 fetchBreeds(breedSelect);
 
 // fetchCatByBreed(breedId);
 
 
 function handleBreedSelectChange() {
-  const selectedBreedId = breedSelect.selected();
+  const selectedBreedId = breedSelect.selected(); // получаем из селекта выбранный идентификатор породы
   console.log('Selected breed ID:', selectedBreedId);
 
   if (selectedBreedId) {
