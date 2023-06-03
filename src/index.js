@@ -23,7 +23,7 @@ breedSelect.onChange = handleBreedSelectChange;
 
 fetchBreeds(breedSelect);
 
-fetchCatByBreed(breedId);
+// fetchCatByBreed(breedId);
 
 
 function handleBreedSelectChange() {

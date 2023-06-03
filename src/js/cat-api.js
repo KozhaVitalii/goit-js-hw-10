@@ -23,7 +23,7 @@ export function fetchBreeds(breedSelect) {
         })
         .then(breeds => {
             breedSelect.setData(breeds.map(breed => ({ value: breed.id, text: breed.name })));
-            console.log(breeds);
+            // console.log(breeds);
             // hideLoader();
         })
         .catch(error => {
@@ -55,7 +55,7 @@ export function fetchCatByBreed(breedId) {
       return response.json();
     })
       .then(data => {
-        console.log('Response data:', data);
+        // console.log('Response data:', data);
         return data[0]; 
         
     })
@@ -66,13 +66,13 @@ export function fetchCatByBreed(breedId) {
 }
 
 
-fetchCatByBreed('abys')
-  .then(result => {
-    console.log('Result:', result);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+// fetchCatByBreed('abys')
+//   .then(result => {
+//     console.log('Result:', result);
+//   })
+//   .catch(error => {
+//     console.error('Error:', error);
+//   });
 
 
 
