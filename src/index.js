@@ -45,7 +45,7 @@ function showError() {
 }
 
 // showLoader()
-  hideSelect();
+  // hideSelect();
 
 function handleBreedSelectChange() {
   const selectedBreedId = breedSelect.value;
