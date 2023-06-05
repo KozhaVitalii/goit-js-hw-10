@@ -1,17 +1,17 @@
 /* Отступ между элементами */
-/* #breed-select {
+#breed-select {
     background-color: #f5f5f5;
         border-radius: 5px;
         padding: 5px;
         width: 360px;
         margin-top: 20px;
-    } */
+    }
 
-.slim-select {
+/* .slim-select {
     width: 200px;
     color: white;
     background-color: gray;
-}
+} */
 
 
 .cat-info {
