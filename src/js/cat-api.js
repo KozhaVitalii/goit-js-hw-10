@@ -1,22 +1,23 @@
 
-// Работает:
+// // Работает:
 
 const API_KEY = 'live_5clVSpmR3DcATTc6zmmBYI7V8oKT24zFjWh3sjCCkfju0Yzfw7veF6Dz0HIykaC9';
 const BASE_URL = 'https://api.thecatapi.com/v1';
 
-// function hideLoaderSelect() {
-//   loaderElement.classList.add('hidden');
-//   breedSelect.classList.remove('hidden');
-// }
+// // function hideLoaderSelect() {
+// //   loaderElement.classList.add('hidden');
+// //   breedSelect.classList.remove('hidden');
+// // }
 
-// function showLoaderSelect() {
-//   loaderElement.classList.remove('hidden');
-//   breedSelect.classList.add('hidden');
-// }
+// // function showLoaderSelect() {
+// //   loaderElement.classList.remove('hidden');
+// //   breedSelect.classList.add('hidden');
+// // }
 
 
 
-// Функция выполняет запрос к API для получения списка пород кошек.
+// // Функция выполняет запрос к API для получения списка пород кошек.
+
 export function fetchBreeds(breedSelect) {
   const options = {
     headers: {
@@ -61,7 +62,7 @@ function populateBreedsSelect(breeds, breedSelect) {
 }
 
 
-// Функция fetchCatByBreed(breedId) выполняет запрос к API для получения информации о коте определенной породы по Id: 
+// // Функция fetchCatByBreed(breedId) выполняет запрос к API для получения информации о коте определенной породы по Id: 
 export function fetchCatByBreed(breedId) {
   const options = {
     headers: {
@@ -97,7 +98,7 @@ export function fetchCatByBreed(breedId) {
 // const BASE_URL = 'https://api.thecatapi.com/v1';
 
 
-// Функция выполняет запрос к API для получения списка пород кошек.
+// // Функция выполняет запрос к API для получения списка пород кошек.
 // export function fetchBreeds(breedSelect) {
 //   const options = {
 //     headers: {
@@ -107,21 +108,23 @@ export function fetchCatByBreed(breedId) {
 
 //   const url = `${BASE_URL}/breeds`;
 
-//      return fetch(url, options)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error('Failed to fetch breeds');
-//             }
-//             return response.json();
-//         })
-//         .then(breeds => {
-//             breedSelect.setData(breeds.map(breed => ({ value: breed.id, text: breed.name })));
-//             console.log(breeds);
-//         })
-//         .catch(error => {
-//             console.error(error);
-//         })
-//         .finally(() => {
+//   return fetch(url, options)
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error('Failed to fetch breeds');
+//       }
+//       return response.json();
+//     })
+//     .then(breeds => {
+//       breedSelect.setData(breeds.map(breed => ({ value: breed.id, text: breed.name })));
+//       console.log(breeds);
+//     })
+//     .catch(error => {
+//       console.error(error);
+//     })
+//     .finally(() => {
+//       hideLoader();
+//       showSelect();
 //     });
 //     }
 
@@ -172,7 +175,7 @@ export function fetchCatByBreed(breedId) {
 //     })
 //     .catch(error => {
 //       console.error(error);
-//         // showError();
+//         showError();
 //     });
 // }
 
