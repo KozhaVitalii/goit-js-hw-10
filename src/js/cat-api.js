@@ -1,6 +1,4 @@
 
-// // Работает:
-
 const API_KEY = 'live_5clVSpmR3DcATTc6zmmBYI7V8oKT24zFjWh3sjCCkfju0Yzfw7veF6Dz0HIykaC9';
 const BASE_URL = 'https://api.thecatapi.com/v1';
 
