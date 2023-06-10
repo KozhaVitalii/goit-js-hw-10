@@ -9,7 +9,31 @@ const loaderElement = document.querySelector('.loader');
 
 breedSelect.addEventListener('change', handleBreedSelectChange);
 
-fetchBreeds(breedSelect);
+showLoader();
+hideSelect();
+
+fetchBreeds()
+  .then(breeds => {
+    const breedOptions = breeds.map(breed => `<option value="${breed.id}">${breed.name}</option>`);
+    breedSelect.innerHTML = breedOptions.join('');
+    return breeds;
+  })
+  .then(() => {
+    new SlimSelect({
+      select: '#breed-select',
+      placeholder: 'Select a breed',
+      settings: {
+        showSearch: false,
+        searchHighlight: true
+      }
+    });
+    hideLoader();
+  })
+  .catch(error => {
+    console.error(error);
+    showError();
+  });
+ 
 
 function hideLoader() {
   loaderElement.classList.add('hidden');
@@ -25,18 +49,6 @@ function hideSelect() {
 breedSelect.classList.add('hidden');
 }
 
-function showSelect() {
-  breedSelect.classList.remove('hidden');
-}
-
-
-// function showCatInfo() {
-//   catInfoDiv.classList.remove('hidden');
-// }
-
-// function hideCatInfo() {
-//   catInfoDiv.classList.add('hidden');
-// }
 
 function showError() {
   Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!');
@@ -45,14 +57,14 @@ function showError() {
 
 function handleBreedSelectChange() {
   const selectedBreedId = breedSelect.value;
-  
-  showLoader();
-  hideSelect();
 
-    if (selectedBreedId) {
-      fetchCatByBreed(selectedBreedId)
-        .then(data => {
-          const catInfoMarkup = `
+  showLoader();
+ 
+  if (selectedBreedId) {
+    fetchCatByBreed(selectedBreedId)
+      .then(data => data[0])
+      .then(data => {
+        const catInfoMarkup = `
           <div class="cat-container">
             <img src="${data.url}" alt="Cat Image" class="cat-image" width="480">
             <div class="cat-details">
@@ -65,24 +77,15 @@ function handleBreedSelectChange() {
             </div>
           </div>
         `;
-          renderCatInfo(catInfoMarkup);
-          new SlimSelect({
-            select: '#breed-select',
-            placeholder: 'Select a breed',
-            settings: {
-              showSearch: false,
-              searchHighlight: true
-            }
-          });
-        })
-        .catch(error => {
-          console.error(error);
-          showError();
-        })
+        return renderCatInfo(catInfoMarkup);
+      })
+      .catch(error => {
+        console.error(error);
+        showError();
+      })
       .finally(() => {
         hideLoader();
-        // showSelect();
-    });
+      });
   } else {
     renderCatInfo('');
   }
@@ -96,208 +99,40 @@ function renderCatInfo(catInfo) {
 
 
 
-// function handleBreedSelectChange() {
-// const selectedBreedId = breedSelect.value;
-  
-//   showLoader();
-  
-//   fetchCatByBreed(selectedBreedId)
-//     .then(data => {
-//       const catInfoMarkup = `
-//         <div class="cat-container">
-//           <img src="${data.url}" alt="Cat Image" class="cat-image" width="480">
-//           <div class="cat-details">
-//             <h2 class="cat-breed">${data.breeds[0].name}</h2>
-//             <p class="cat-description">${data.breeds[0].description}</p>
-//             <p class="cat-temperament">
-//               <span class="cat-temperament-key">Temperament:</span>
-//               <span class="cat-temperament-value">${data.breeds[0].temperament}</span>
-//             </p>
-//           </div>
-//         </div>
-//       `;
-//       renderCatInfo(catInfoMarkup);
-//       new SlimSelect({
-//         select: '#breed-select',
-//         placeholder: 'Select a breed',
-//         settings: {
-//           showSearch: false,
-//           searchHighlight: true
-//         }
-//       });
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       showError();
-//     })
-//     .finally(() => {
-//       hideLoader();
+
+
+
+
+
+
+
+// fetchBreeds()
+//   .then(breeds => {
+//     return new Promise(resolve => {
+//       setTimeout(() => {
+//         const breedOptions = breeds.map(breed => `<option value="${breed.id}">${breed.name}</option>`);
+//         breedSelect.innerHTML = breedOptions.join('');
+//         resolve(breeds);
+//       }, 2000); // Задержка в 2000 миллисекунд (2 секунды)
 //     });
-// }
-
-
-
-// function handleBreedSelectChange() {
-//   const selectedBreedId = breedSelect.value;
-  
-//   showLoader();
-
-//   fetchCatByBreed(selectedBreedId)
-//     .then(data => {
-//       const catInfoMarkup = `
-//         <div class="cat-container">
-//           <img src="${data.url}" alt="Cat Image" class="cat-image" width="480">
-//           <div class="cat-details">
-//             <h2 class="cat-breed">${data.breeds[0].name}</h2>
-//             <p class="cat-description">${data.breeds[0].description}</p>
-//             <p class="cat-temperament">
-//               <span class="cat-temperament-key">Temperament:</span>
-//               <span class="cat-temperament-value">${data.breeds[0].temperament}</span>
-//             </p>
-//           </div>
-//         </div>
-//       `;
-//       renderCatInfo(catInfoMarkup);
-// new SlimSelect({
-//   select: '#breed-select',
-//   placeholder: 'Select a breed',
-//   settings: {
-//     showSearch: false,
-//     searchHighlight: true
-//   }
-// });
-
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       showError();
-//     })
-//     .finally(() => {
-//       hideLoader();
+//   })
+//   .then(() => {
+//     return new Promise(resolve => {
+//       setTimeout(() => {
+//         new SlimSelect({
+//           select: '#breed-select',
+//           placeholder: 'Select a breed',
+//           settings: {
+//             showSearch: false,
+//             searchHighlight: true
+//           }
+//         });
+//         hideLoader();
+//         resolve();
+//       }, 1000); // Задержка в 1000 миллисекунд (1 секунда)
 //     });
-// }
-
-
-
-
-// import './css/common.css';
-// // import Notiflix from 'notiflix';
-// import SlimSelect from 'slim-select';
-// import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
-
-
-// const catInfoDiv = document.querySelector('.cat-info');
-
-// fetchBreeds().then(breeds => {
-//   const breedSelect = new SlimSelect({
-//     select: '#breed-select',
-//     placeholder: 'Select a breed',
-//     settings: {
-//       showSearch: false,
-//       searchHighlight: true
-//     },
-//     data: breeds.map(breed => ({ value: breed.id, text: breed.name }))
+//   })
+//   .catch(error => {
+//     console.error(error);
+//     showError();
 //   });
-
-//   breedSelect.onChange = handleBreedSelectChange;
-// }).catch(error => {
-//   console.error(error);
-// });
-
-// function handleBreedSelectChange() {
-//   const breedSelect = document.querySelector('#breed-select');
-//   const selectedBreedId = breedSelect.selected();
-//   console.log('Selected breed ID:', selectedBreedId);
-
-//   if (selectedBreedId) {
-//     fetchCatByBreed(selectedBreedId)
-//       .then(data => {
-//         const catInfoMarkup = `
-//           <div class="cat-container">
-//             <img src="${data.url}" alt="Cat Image" class="cat-image" width="480">
-//             <div class="cat-details">
-//               <h2 class="cat-breed">${data.breeds[0].name}</h2>
-//               <p class="cat-description">${data.breeds[0].description}</p>
-//               <p class="cat-temperament">
-//                 <span class="cat-temperament-key">Temperament:</span>
-//                 <span class="cat-temperament-value">${data.breeds[0].temperament}</span>
-//               </p>
-//             </div>
-//           </div>
-//         `;
-//         renderCatInfo(catInfoMarkup);
-//         console.log('Result:', data);
-//       })
-//       .catch(error => {
-//         console.error(error);
-//       });
-//   } else {
-//     renderCatInfo('');
-//   }
-// }
-
-// function renderCatInfo(catInfo) {
-//   const catInfoMarkup = catInfo;
-//   catInfoDiv.innerHTML = catInfoMarkup;
-// }
-
-
-
-// const breedSelect = new SlimSelect({
-//   select: '#breed-select',
-//   placeholder: 'Select a breed',
-//   settings: {
-//     showSearch: false,
-//     searchHighlight: true
-//   }
-// });
-
-// Получяем ссылку на элемент с классом "cat-info" в переменную catInfoDiv. 
-// const catInfoDiv = document.querySelector('.cat-info');
-// // const loaderElement = document.querySelector('.loader');
-
-// // Устанавиваем обработчик события onChange для объекта breedSelect, который будет вызывать функцию 
-// // handleBreedSelectChange при изменении выбранного значения в селекте породы.
-// breedSelect.onChange = handleBreedSelectChange;
-// // breedSelect.addEventListener('change', handleBreedSelectChange);
-
-// // Вызываем функцию fetchBreeds с передачей объекта breedSelect в качестве аргумента.
-// fetchBreeds(breedSelect);
-
-
-
-// function handleBreedSelectChange() {
-//   const selectedBreedId = breedSelect.selected(); // получаем из селекта выбранный идентификатор породы
-//   console.log('Selected breed ID:', selectedBreedId);
-
-//   if (selectedBreedId) {
-//     fetchCatByBreed(selectedBreedId)
-//       .then(data => {
-//         const catInfoMarkup = `
-//           <div class="cat-container">
-//             <img src="${data.url}" alt="Cat Image" class="cat-image" width="480">
-//             <div class="cat-details">
-//               <h2 class="cat-breed">${data.breeds[0].name}</h2>
-//               <p class="cat-description">${data.breeds[0].description}</p>
-//               <p class="cat-temperament">
-//                 <span class="cat-temperament-key">Temperament:</span>
-//                 <span class="cat-temperament-value">${data.breeds[0].temperament}</span>
-//               </p>
-//             </div>
-//           </div>
-//         `;
-//         renderCatInfo(catInfoMarkup);
-//         console.log('Result:', data);
-//       })
-//       .catch(error => {
-//         console.error(error);
-//       });
-//   } else {
-//     renderCatInfo('');
-//   }
-// }
-
-// function renderCatInfo(catInfo) {
-//   const catInfoMarkup = catInfo;
-//   catInfoDiv.innerHTML = catInfoMarkup;
-// }
